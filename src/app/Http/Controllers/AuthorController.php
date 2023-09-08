@@ -31,7 +31,7 @@ class AuthorController extends Controller
         return view('edit', ['form' => $author]);
     }
 
-    public function update(Request $request)
+    public function update(AuthorRequest $request)
     {
         $form = $request->all();
         unset($form['_token']);
