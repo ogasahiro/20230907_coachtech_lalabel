@@ -1,35 +1,61 @@
 @extends('layouts.default')
 <style>
-  th {
-    background-color: #289ADC;
-    color: white;
-    padding: 5px 40px;
-  }
-  tr:nth-child(odd) td{
-    background-color: #FFFFFF;
-  }
-  td {
-    padding: 25px 40px;
-    background-color: #EEEEEE;
-    text-align: center;
-  }
+th {
+  background-color: #289ADC;
+  color: white;
+  padding: 5px 40px;
+}
+
+tr:nth-child(odd) td {
+  background-color: #FFFFFF;
+}
+
+td table {
+  margin: 0 auto;
+}
+
+td {
+  padding: 25px 40px;
+  background-color: #EEEEEE;
+  text-align: center;
+}
+
+td table tbody tr td {
+  background-color: #EEEEEE !important;
+}
 </style>
-@section('title', 'index.blade.php')
+@section('title', 'author.index.blade.php')
 
 @section('content')
 <table>
   <tr>
-    <th>id</th>
-    <th>name</th>
-    <th>age</th>
-    <th>nationality</th>
+    <th>Author</th>
+    <th>Book</th>
   </tr>
-  @foreach ($authors as $author)
+  @foreach ($hasItems as $item)
   <tr>
-    <td>{{$author->id}}</td>
-    <td>{{$author->name}}</td>
-    <td>{{$author->age}}</td>
-    <td>{{$author->nationality}}</td>
+    <td>
+      {{$item->getDetail()}}
+    </td>
+    <td>
+      <table>
+        @foreach ($item->books as $obj)
+        <tr>
+          <td>{{ $obj->getTitle() }}</td>
+        </tr>
+        @endforeach
+      </table>
+    </td>
+  </tr>
+  @endforeach
+</table>
+<table>
+  <tr>
+    <th>Author</th>
+  </tr>
+  @foreach ($noItems as $item)
+  <tr>
+    <td>{{ $item->getDetail() }}</td>
   </tr>
   @endforeach
 </table>

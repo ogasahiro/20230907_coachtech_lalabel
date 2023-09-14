@@ -10,8 +10,8 @@ class AuthorController extends Controller
 {
     public function index()
     {
-        $authors = Author::all();
-        return view('index', ['authors' => $authors]);
+        $authors = Author::Paginate(3);
+    return view('index', ['authors' => $authors]);
    }
 
     public function add()
@@ -50,5 +50,15 @@ class AuthorController extends Controller
         Author::find($request->id)->delete();
         return redirect('/');
     }
+
+    public function verror()
+    {
+    return view('verror');
+    }
+    public function relate(Request $request)
+{
+    $items = Author::all();
+    return view('author.index', ['items' => $items]);
+}
 
 }

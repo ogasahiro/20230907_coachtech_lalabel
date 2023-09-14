@@ -16,4 +16,17 @@ class Author extends Model
     $txt = 'ID:'.$this->id . ' ' . $this->name . '(' . $this->age .  '才'.') '.$this->nationality;
     return $txt;
   }
+  public function book(){
+    return $this->hasOne('App\Models\Book');
+  }
+  public function books(){
+    return $this->hasMany('App\Models\Book');
+  }
+  public function relate(Request $request)
+{
+    $hasItems = Author::has('book')->get();
+    $noItems = Author::doesntHave('book')->get();
+    $param = ['hasItems' => $hasItems, 'noItems' => $noItems];
+    return view('author.index',$param);
+}
 }
